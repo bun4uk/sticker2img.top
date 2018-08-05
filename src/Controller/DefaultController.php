@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
 
     public function bot(Request $request)
     {
-        file_put_contents(__DIR__. '/request_dump', $request);
+        file_put_contents(__DIR__. '/request_dump', $request->getContent());
         return new Response('bot');
     }
 
