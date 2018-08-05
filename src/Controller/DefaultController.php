@@ -20,4 +20,10 @@ class DefaultController extends AbstractController
         return new Response('yes');
     }
 
+    public function bot(Request $request)
+    {
+        file_put_contents(__DIR__. '/request_dump', $request);
+        return new Response('bot');
+    }
+
 }
