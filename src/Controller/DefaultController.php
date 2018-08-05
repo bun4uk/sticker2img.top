@@ -16,7 +16,7 @@ class DefaultController extends AbstractController
 {
     public function index(Request $request)
     {
-        file_put_contents('request_dump', $request);
+        file_put_contents(__DIR__. '/request_dump', $request);
         return new Response('yes');
     }
 
