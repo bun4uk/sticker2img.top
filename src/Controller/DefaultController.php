@@ -68,7 +68,7 @@ class DefaultController extends AbstractController
 
         if (isset($update->message->text) && false !== strpos($update->message->text, 'start')) {
             $telegramApi->sendMessage($update->message->chat->id, 'Hi there! I\'m Sticker2Image bot. I\'ll help you to convert your stickers to PNG images. Just send me some sticker.');
-            return true;
+            return new Response('sent');
         }
 
         if (isset($update->message->sticker)) {
@@ -109,7 +109,7 @@ class DefaultController extends AbstractController
                 $telegramApi->sendPhoto($update->message->chat->id, $imgPathWebp);
                 unlink($imgPathWebp);
 
-                return true;
+                return new Response('sent');
 
             } catch (\Exception $exception) {
                 $telegramApi->sendMessage($update->message->chat->id, 'Sorry, I am tired. Some server error. Try in a few minutes :\'( ');
@@ -129,7 +129,7 @@ class DefaultController extends AbstractController
             $date = (isset($command[1]) && !empty($command[1])) ? $command[1] : (new \DateTime())->format('Y-m-d');
             exec("cat logs/img_log.log | grep === | grep {$date} | wc -l", $result);
             $telegramApi->sendMessage(7699150, 'Бот был использован ' . reset($result) . ' раз');
-            return true;
+            return new Response('sent');
         }
 
         if (isset($update->message, $update->message->chat->id)) {
