@@ -5,6 +5,7 @@ use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
 
+date_default_timezone_set('Europe/Kiev');
 require __DIR__.'/../vendor/autoload.php';
 
 // The check is to ensure we don't use .env in production
