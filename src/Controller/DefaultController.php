@@ -47,7 +47,7 @@ class DefaultController extends AbstractController
 //        ]);
 
         try {
-            $log->pushHandler(new StreamHandler('./logs/img_log.log', 200));
+            $log->pushHandler(new StreamHandler('/var/www/sticker2img.top/logs/img_log.log', 200));
         } catch (\Exception $exception) {
             error_log('logger exception');
         }
@@ -113,10 +113,10 @@ class DefaultController extends AbstractController
 
             } catch (\Exception $exception) {
                 $telegramApi->sendMessage($update->message->chat->id, 'Sorry, I am tired. Some server error. Try in a few minutes :\'( ');
-                $log->log(404, '===============');
-                $log->log(404, $exception->getCode());
-                $log->log(404, $exception->getMessage());
-                $log->log(404, '===============');
+                $log->log(200, '===============');
+                $log->log(200, $exception->getCode());
+                $log->log(200, $exception->getMessage());
+                $log->log(200, '===============');
             }
         }
 
