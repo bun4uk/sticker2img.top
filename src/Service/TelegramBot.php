@@ -21,13 +21,13 @@ class TelegramBot
     /**
      * TelegramBot constructor.
      * @param string $token
-     * @param Logger $log
+//     * @param Logger $log
      */
-    public function __construct(string $token, Logger $log)
+    public function __construct(string $token/*, Logger $log*/)
     {
         $this->token = $token;
 //        file_put_contents('token.txt', $token);
-        $this->log = $log;
+//        $this->log = $log;
     }
 
     /**
@@ -45,10 +45,10 @@ class TelegramBot
      */
     protected $token;
 
-    /**
-     * @var Logger
-     */
-    protected $log;
+//    /**
+//     * @var Logger
+//     */
+//    protected $log;
 
     /**
      * @param string $method
@@ -113,7 +113,7 @@ class TelegramBot
                 'chat_id' => $chatId
             ]);
         } catch (GuzzleException $exception) {
-            $this->log->log(400, 'Guzzle sendMessage error');
+//            $this->log->log(400, 'Guzzle sendMessage error');
         }
 
         return $response;
