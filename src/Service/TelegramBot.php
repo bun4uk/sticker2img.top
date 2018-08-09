@@ -11,6 +11,7 @@ namespace App\Service;
 use GuzzleHttp\Client;
 use Monolog\Logger;
 use GuzzleHttp\Exception\GuzzleException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class TelegramBot
@@ -63,13 +64,14 @@ class TelegramBot
             if (!empty($params)) {
                 $url .= '?' . http_build_query($params);
             }
-            file_put_contents('query_log.txt', $url);
+//            file_put_contents('query_log.txt', $url);
             $client = new Client(['base_uri' => $url]);
             $result = $client->request('GET');
 
             $response = json_decode($result->getBody()->getContents());
         } catch (\Exception $exception) {
-            file_put_contents('query_error_log.txt', $exception->getMessage());
+            return new JsonResponse(['error']);
+//            file_put_contents('query_error_log.txt', $exception->getMessage());
         }
 
         return $response;

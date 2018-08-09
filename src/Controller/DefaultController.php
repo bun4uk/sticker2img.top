@@ -136,12 +136,7 @@ class DefaultController extends AbstractController
             $telegramApi->sendMessage($update->message->chat->id, 'I understand only stickers');
         }
 
-//
-//
-//
-//
-
-
+        return new Response('sent');
     }
 
 }
