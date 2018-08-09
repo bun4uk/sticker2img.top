@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use App\Service\TelegramBot;
 
 class DefaultController extends AbstractController
 {
@@ -29,21 +30,21 @@ class DefaultController extends AbstractController
 //
 //
 //
-//        $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
-        $config = parse_ini_file(__DIR__ . '/../../config/config.ini');
+        $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
+//        $config = parse_ini_file(__DIR__ . '/../../config/config.ini');
 
 
         $token = $config['telegram_api_token'];
         $log = new Logger('img_log');
 
-        
+
         $telegramApi = new TelegramBot($token, $log);
-        $db = new Database([
-            'db_host' => $config['db_host'],
-            'db_name' => $config['db_name'],
-            'db_user' => $config['db_user'],
-            'db_password' => $config['db_password'],
-        ]);
+//        $db = new Database([
+//            'db_host' => $config['db_host'],
+//            'db_name' => $config['db_name'],
+//            'db_user' => $config['db_user'],
+//            'db_password' => $config['db_password'],
+//        ]);
 
         try {
             $log->pushHandler(new StreamHandler('./logs/img_log.log', 200));
@@ -55,15 +56,15 @@ class DefaultController extends AbstractController
         $request = json_decode($request);
 
         $update = $request;
-        if (!$db->userExists($update->message->chat->id)) {
-            $db->saveUser([
-                'chat_id' => $update->message->chat->id,
-                'username' => $update->message->chat->username ?? null,
-                'type' => $update->message->chat->type ?? null
-            ]);
-
-            $telegramApi->sendMessage(7699150, 'New user @' . $update->message->chat->username ?? null);
-        }
+//        if (!$db->userExists($update->message->chat->id)) {
+//            $db->saveUser([
+//                'chat_id' => $update->message->chat->id,
+//                'username' => $update->message->chat->username ?? null,
+//                'type' => $update->message->chat->type ?? null
+//            ]);
+//
+//            $telegramApi->sendMessage(7699150, 'New user @' . $update->message->chat->username ?? null);
+//        }
 
         if (isset($update->message->text) && false !== strpos($update->message->text, 'start')) {
             $telegramApi->sendMessage($update->message->chat->id, 'Hi there! I\'m Sticker2Image bot. I\'ll help you to convert your stickers to PNG images. Just send me some sticker.');
@@ -92,12 +93,12 @@ class DefaultController extends AbstractController
                 $log->log(200, $file->file_path);
                 $log->log(200, '==============');
 
-                $db->saveAction([
-                    'chat_id' => $update->message->chat->id,
-                    'set_name' => $update->message->sticker->set_name,
-                    'file_id' => $update->message->sticker->file_id,
-                    'file_path' => $file->file_path
-                ]);
+//                $db->saveAction([
+//                    'chat_id' => $update->message->chat->id,
+//                    'set_name' => $update->message->sticker->set_name,
+//                    'file_id' => $update->message->sticker->file_id,
+//                    'file_path' => $file->file_path
+//                ]);
 
                 $fileName = './img_' . time() . mt_rand();
                 $imgPathWebp = $fileName . '.webp';
