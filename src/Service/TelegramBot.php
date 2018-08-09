@@ -25,7 +25,7 @@ class TelegramBot
     public function __construct(string $token, Logger $log)
     {
         $this->token = $token;
-        file_put_contents('token.txt', $token);
+//        file_put_contents('token.txt', $token);
         $this->log = $log;
     }
 
