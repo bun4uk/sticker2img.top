@@ -100,7 +100,7 @@ class DefaultController extends AbstractController
 //                    'file_path' => $file->file_path
 //                ]);
 
-                $fileName = './img_' . time() . mt_rand();
+                $fileName = '/var/www/sticker2img.top/public/files/img_' . time() . mt_rand();
                 $imgPathWebp = $fileName . '.webp';
                 copy(
                     $filePath,
