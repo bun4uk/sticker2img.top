@@ -11,8 +11,6 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use App\Service\TelegramBot;
 
 class DefaultController extends AbstractController
@@ -20,51 +18,20 @@ class DefaultController extends AbstractController
     public function index(Request $request)
     {
         file_put_contents(__DIR__ . '/request_dump', $request);
-        return new Response('yes');
+        return new Response('', 404);
     }
 
     public function bot(Request $request)
     {
         file_put_contents(__DIR__ . '/request_dump', $request->getContent());
-//        return new Response('bota');
-//
-//
-//
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
-//        $config = parse_ini_file(__DIR__ . '/../../config/config.ini');
-
 
         $token = $config['telegram_api_token'];
-//        $log = new Logger('img_log');
-
-
         $telegramApi = new TelegramBot($token);
-//        $db = new Database([
-//            'db_host' => $config['db_host'],
-//            'db_name' => $config['db_name'],
-//            'db_user' => $config['db_user'],
-//            'db_password' => $config['db_password'],
-//        ]);
-
-//        try {
-//            $log->pushHandler(new StreamHandler('/var/www/sticker2img.top/logs/img_log.log', 200));
-//        } catch (\Exception $exception) {
-//            error_log('logger exception');
-//        }
-
         $request = file_get_contents('php://input');
         $request = json_decode($request);
 
         $update = $request;
-//        if (!$db->userExists($update->message->chat->id)) {
-//            $db->saveUser([
-//                'chat_id' => $update->message->chat->id,
-//                'username' => $update->message->chat->username ?? null,
-//                'type' => $update->message->chat->type ?? null
-//            ]);
-//
-//            $telegramApi->sendMessage(7699150, 'New user @' . $update->message->chat->username ?? null);
-//        }
 
         if (isset($update->message->text) && false !== strpos($update->message->text, 'start')) {
             $telegramApi->sendMessage($update->message->chat->id, 'Hi there! I\'m Sticker2Image bot. I\'ll help you to convert your stickers to PNG images. Just send me some sticker.');
@@ -77,29 +44,6 @@ class DefaultController extends AbstractController
                 $telegramApi->sendMessage($update->message->chat->id, '...');
                 $file = $telegramApi->getFile($update->message->sticker);
                 $filePath = "https://api.telegram.org/file/bot$token/" . $file->file_path;
-
-//                $log->log(200, $update->message->chat->id);
-//                if (isset($update->message->chat->first_name)) {
-//                    $log->log(200, $update->message->chat->first_name);
-//                }
-//                if (isset($update->message->chat->last_name)) {
-//                    $log->log(200, $update->message->chat->last_name);
-//                }
-//                if (isset($update->message->chat->username)) {
-//                    $log->log(200, $update->message->chat->username);
-//                }
-//                $log->log(200, $update->message->sticker->set_name);
-//                $log->log(200, $update->message->sticker->file_id);
-//                $log->log(200, $file->file_path);
-//                $log->log(200, '==============');
-
-//                $db->saveAction([
-//                    'chat_id' => $update->message->chat->id,
-//                    'set_name' => $update->message->sticker->set_name,
-//                    'file_id' => $update->message->sticker->file_id,
-//                    'file_path' => $file->file_path
-//                ]);
-
                 $fileName = '/var/www/sticker2img.top/public/files/img_' . time() . mt_rand();
                 $imgPathWebp = $fileName . '.webp';
                 copy(
@@ -113,10 +57,7 @@ class DefaultController extends AbstractController
 
             } catch (\Exception $exception) {
                 $telegramApi->sendMessage($update->message->chat->id, 'Sorry, I am tired. Some server error. Try in a few minutes :\'( ');
-//                $log->log(200, '===============');
-//                $log->log(200, $exception->getCode());
-//                $log->log(200, $exception->getMessage());
-//                $log->log(200, '===============');
+                return new Response('server_error');
             }
         }
 

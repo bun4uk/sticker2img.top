@@ -21,7 +21,7 @@ class TelegramBot
     /**
      * TelegramBot constructor.
      * @param string $token
-//     * @param Logger $log
+     * //     * @param Logger $log
      */
     public function __construct(string $token/*, Logger $log*/)
     {
@@ -102,9 +102,10 @@ class TelegramBot
     /**
      * @param int $chatId
      * @param string $text
-     * @return stdClass
+     * @return \stdClass
+     * @throws \Exception
      */
-    public function sendMessage(int $chatId = 0, string $text): \stdClass
+    public function sendMessage(int $chatId, string $text): \stdClass
     {
         $response = new \stdClass();
         try {
@@ -113,13 +114,13 @@ class TelegramBot
                 'chat_id' => $chatId
             ]);
         } catch (GuzzleException $exception) {
-//            $this->log->log(400, 'Guzzle sendMessage error');
+            throw new  \Exception();
         }
 
         return $response;
     }
 
-    public function getFile($file): object
+    public function getFile($file): \stdClass
     {
         $response = $this->query('getFile', [
             'file_id' => $file->file_id
