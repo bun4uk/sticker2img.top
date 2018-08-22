@@ -6,13 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Action
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\HasLifecycleCallbacks()
      * @ORM\Column(type="integer")
      */
     private $id;
