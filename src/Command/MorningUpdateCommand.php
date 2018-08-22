@@ -43,8 +43,8 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine');
         $conn = $em->getConnection();
         $date = new \DateTime();
-        $dateFrom = $date->setTime(0, 0, 0)->format('Y-m-d h:i:s');
-        $dateTo = $date->setTime(23, 59, 59)->format('Y-m-d h:i:s');
+        $dateFrom = $date->setTime(0, 0, 0)->format('Y-m-d') . ' 0:0:0';
+        $dateTo = $date->setTime(23, 59, 59)->format('Y-m-d' . ' 23:59:59');
         $sql = "SELECT 
                   count(*) as count 
                 FROM action a
