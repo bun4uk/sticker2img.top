@@ -62,17 +62,17 @@ class DefaultController extends AbstractController
             }
         }
 
-        if (
-            isset($update->message, $update->message->chat->username)
-            && mb_strtolower($update->message->chat->username) === Dictionary::PAULMAKARON
-            && false !== strpos($update->message->text, '/call_count')
-        ) {
-            $command = explode(' ', $update->message->text);
-            $date = (isset($command[1]) && !empty($command[1])) ? $command[1] : (new \DateTime())->format('Y-m-d');
-            exec("cat logs/img_log.log | grep === | grep {$date} | wc -l", $result);
-            $telegramApi->sendMessage(7699150, 'Бот был использован ' . reset($result) . ' раз');
-            return new Response('sent');
-        }
+//        if (
+//            isset($update->message, $update->message->chat->username)
+//            && mb_strtolower($update->message->chat->username) === Dictionary::PAULMAKARON
+//            && false !== strpos($update->message->text, '/call_count')
+//        ) {
+//            $command = explode(' ', $update->message->text);
+//            $date = (isset($command[1]) && !empty($command[1])) ? $command[1] : (new \DateTime())->format('Y-m-d');
+//            exec("cat logs/img_log.log | grep === | grep {$date} | wc -l", $result);
+//            $telegramApi->sendMessage(7699150, 'Бот был использован ' . reset($result) . ' раз');
+//            return new Response('sent');
+//        }
 
         if (isset($update->message, $update->message->chat->id)) {
             $telegramApi->sendMessage($update->message->chat->id, 'I understand only stickers');
