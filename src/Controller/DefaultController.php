@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +35,9 @@ class DefaultController extends AbstractController
         $token = $config['telegram_api_token'];
         $telegramApi = new TelegramBot($token);
         $update = json_decode($request->getContent());
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $userRepository->find($update->message->chat->id);
 
         if (isset($update->message->text) && false !== strpos($update->message->text, 'start')) {
             $telegramApi->sendMessage($update->message->chat->id, 'Hi there! I\'m Sticker2Image bot. I\'ll help you to convert your stickers to PNG images. Just send me some sticker.');
@@ -40,6 +45,13 @@ class DefaultController extends AbstractController
         }
 
         if (isset($update->message->sticker)) {
+            if (!$user) {
+                $user = new User();
+                $user->setChatId($update->message->chat->id);
+                $user->setFirstLaunch(new \DateTime());
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
             try {
                 $telegramApi->sendMessage($update->message->chat->id, 'I\'ve got your sticker');
                 $telegramApi->sendMessage($update->message->chat->id, '...');
