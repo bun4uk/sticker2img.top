@@ -52,6 +52,7 @@ class DefaultController extends AbstractController
                 $user->setLastname($update->message->chat->last_name ?? null);
                 $user->setFirstLaunch(new \DateTime());
             }
+            $user->setLastAction();
             $entityManager->persist($user);
             $entityManager->flush();
             try {
