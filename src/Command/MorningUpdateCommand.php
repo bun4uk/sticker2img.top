@@ -55,6 +55,6 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $res = $stmt->fetchAll();
 //        $count = $res['count'] ? $res['count'] : 0;
         $telegramApi->sendMessage(7699150, 'Вчера бот был использован - ' . json_encode($res) . 'раз(а)');
-        $output->writeln($res['count']);
+        $output->writeln($sql);
     }
 }
