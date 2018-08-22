@@ -9,18 +9,25 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Service\TelegramBot;
 
+/**
+ * Class DefaultController
+ * @package App\Controller
+ */
 class DefaultController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function index(Request $request)
     {
         file_put_contents(__DIR__ . '/request_dump', $request);
-        return new Response('', 404);
+        return new Response('NOT FOUND', 404);
     }
 
     /**
@@ -35,6 +42,9 @@ class DefaultController extends AbstractController
         $token = $config['telegram_api_token'];
         $telegramApi = new TelegramBot($token);
         $update = json_decode($request->getContent());
+        if (!$update->message) {
+            return new Response('NOT FOUND', 404);
+        }
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $entityManager = $this->getDoctrine()->getManager();
         $user = $userRepository->findOneBy(['chatId' => $update->message->chat->id]);

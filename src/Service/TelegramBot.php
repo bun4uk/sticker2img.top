@@ -21,19 +21,16 @@ class TelegramBot
     /**
      * TelegramBot constructor.
      * @param string $token
-     * //     * @param Logger $log
      */
-    public function __construct(string $token/*, Logger $log*/)
+    public function __construct(string $token)
     {
         $this->token = $token;
-//        file_put_contents('token.txt', $token);
-//        $this->log = $log;
     }
 
     /**
      * @const TELEGRAM_API_URL
      */
-    const TELEGRAM_API_URL = 'https://api.telegram.org/bot';
+    public const TELEGRAM_API_URL = 'https://api.telegram.org/bot';
 
     /**
      * @var int
@@ -44,11 +41,6 @@ class TelegramBot
      * @var string
      */
     protected $token;
-
-//    /**
-//     * @var Logger
-//     */
-//    protected $log;
 
     /**
      * @param string $method
@@ -64,40 +56,16 @@ class TelegramBot
             if (!empty($params)) {
                 $url .= '?' . http_build_query($params);
             }
-//            file_put_contents('query_log.txt', $url);
             $client = new \GuzzleHttp\Client(['base_uri' => $url]);
             $result = $client->request('GET');
 
             $response = json_decode($result->getBody()->getContents());
         } catch (\Exception $exception) {
             return new JsonResponse(['error']);
-//            file_put_contents('query_error_log.txt', $exception->getMessage());
         }
 
         return $response;
     }
-
-//    /**
-//     * @return stdClass
-//     */
-//    public function getUpdates(): object
-//    {
-//        $response = new stdClass();
-//        try {
-//            $response = $this->query('getUpdates', [
-//                'offset' => $this->offset + 1
-//            ]);
-//            if (!empty($response->result)) {
-//                $this->offset = $response->result[count($response->result) - 1]->update_id;
-//            }
-//
-////            if()
-//        } catch (GuzzleException $exception) {
-//            $this->log->log(400, 'Guzzle sendMessage error');
-//        }
-//
-//        return $response;
-//    }
 
     /**
      * @param int $chatId
