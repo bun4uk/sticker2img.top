@@ -53,7 +53,7 @@ class DefaultController extends AbstractController
                 $user->setLastname($update->message->chat->last_name ?? null);
                 $user->setFirstLaunch(new \DateTime());
 
-                $telegramApi->sendMessage(7699150, 'New user ' . $user->getFirstname() . ' ' . $user->getLastname() . ' @' . $user->getUsername() . ' раз');
+                $telegramApi->sendMessage(7699150, 'New user ' . $user->getFirstname() . ' ' . $user->getLastname() . ' @' . $user->getUsername());
             }
             $user->setLastAction(new \DateTime());
             $entityManager->persist($user);
