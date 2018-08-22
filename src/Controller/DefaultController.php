@@ -24,10 +24,9 @@ class DefaultController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
-        file_put_contents(__DIR__ . '/request_dump', $request);
-        return new Response('NOT FOUND', 404);
+        return new Response('404 NOT FOUND', 404);
     }
 
     /**
@@ -35,7 +34,7 @@ class DefaultController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function bot(Request $request)
+    public function bot(Request $request): Response
     {
         file_put_contents(__DIR__ . '/request_dump_d', $request->getContent());
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
