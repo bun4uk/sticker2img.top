@@ -13,6 +13,7 @@ class User
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ORM\HasLifecycleCallbacks()
      */
     private $id;
 
@@ -116,10 +117,11 @@ class User
         return $this->lastAction;
     }
 
-    public function setLastAction(\DateTimeInterface $lastAction): self
+    /**
+     * @ORM\PrePersist
+     */
+    public function setLastAction(): void
     {
-        $this->lastAction = $lastAction;
-
-        return $this;
+        $this->lastAction = new \DateTime();
     }
 }

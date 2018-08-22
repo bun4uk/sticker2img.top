@@ -12,6 +12,7 @@ class Action
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
+     * @ORM\HasLifecycleCallbacks()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -40,6 +41,14 @@ class Action
      * @ORM\Column(type="datetime")
      */
     private $time;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTime(): void
+    {
+        $this->time = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -99,10 +108,10 @@ class Action
         return $this->time;
     }
 
-    public function setTime(\DateTimeInterface $time): self
-    {
-        $this->time = $time;
-
-        return $this;
-    }
+//    public function setTime(\DateTimeInterface $time): self
+//    {
+//        $this->time = $time;
+//
+//        return $this;
+//    }
 }
