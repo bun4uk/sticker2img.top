@@ -42,7 +42,7 @@ class DefaultController extends AbstractController
         $token = $config['telegram_api_token'];
         $telegramApi = new TelegramBot($token);
         $update = json_decode($request->getContent());
-        if (!$update->message) {
+        if (!$update) {
             return new Response('NOT FOUND', 404);
         }
         $userRepository = $this->getDoctrine()->getRepository(User::class);
