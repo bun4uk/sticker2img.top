@@ -9,10 +9,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Service\TelegramBot;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class DefaultController
@@ -26,7 +28,7 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        return new Response('404 NOT FOUND', 404);
+        throw new NotFoundHttpException();
     }
 
     /**
@@ -42,7 +44,7 @@ class DefaultController extends AbstractController
         $telegramApi = new TelegramBot($token);
         $update = json_decode($request->getContent());
         if (!$update) {
-            return new Response('NOT FOUND', 404);
+            throw new NotFoundHttpException();
         }
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $entityManager = $this->getDoctrine()->getManager();
