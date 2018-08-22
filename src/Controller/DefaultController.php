@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Action;
 use App\Entity\User;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,6 +83,14 @@ class DefaultController extends AbstractController
                 );
                 $telegramApi->sendPhoto($update->message->chat->id, $imgPathWebp);
                 unlink($imgPathWebp);
+
+                $action = new Action();
+                $action->setChatId($update->message->chat->id);
+                $action->setSetName($update->message->sticker->set_name ?? null);
+                $action->setFileId($update->message->sticker->file_id ?? null);
+                $action->setFilePath($file->file_path);
+                $entityManager->persist($user);
+                $entityManager->flush();
 
                 return new Response('sent');
 
