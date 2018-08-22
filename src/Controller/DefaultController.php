@@ -89,7 +89,7 @@ class DefaultController extends AbstractController
                 $action->setSetName($update->message->sticker->set_name ?? null);
                 $action->setFileId($update->message->sticker->file_id ?? null);
                 $action->setFilePath($file->file_path);
-                $entityManager->persist($user);
+                $entityManager->persist($action);
                 $entityManager->flush();
 
                 return new Response('sent');
