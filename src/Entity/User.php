@@ -6,10 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class User
 {
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->setLastAction(new \DateTime());
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -117,11 +124,10 @@ class User
         return $this->lastAction;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function setLastAction(): void
+    public function setLastAction(\DateTimeInterface $lastAction): self
     {
-        $this->lastAction = new \DateTime();
+        $this->lastAction = new $lastAction;
+
+        return $this;
     }
 }
