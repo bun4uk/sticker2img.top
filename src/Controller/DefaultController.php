@@ -23,11 +23,11 @@ class DefaultController extends AbstractController
 
     public function bot(Request $request)
     {
+        $request = $request->getContent();
         file_put_contents(__DIR__ . '/request_dump', $request->getContent());
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
         $token = $config['telegram_api_token'];
         $telegramApi = new TelegramBot($token);
-
         $update = $request;
 
         if (isset($update->message->text) && false !== strpos($update->message->text, 'start')) {
