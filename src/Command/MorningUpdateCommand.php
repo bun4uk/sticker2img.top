@@ -46,7 +46,7 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $dateFrom = $date->setTime(0, 0, 0)->format('Y-m-d h:i:s');
         $dateTo = $date->setTime(23, 59, 59)->format('Y-m-d h:i:s');
         $sql = "SELECT 
-                  count(*) count 
+                  count(*) as count 
                 FROM action a
                 WHERE time >= '{$dateFrom}'
                 AND time <= '{$dateTo}'";
