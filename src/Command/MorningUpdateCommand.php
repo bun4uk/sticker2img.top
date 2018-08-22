@@ -48,8 +48,8 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $sql = "SELECT 
                   count(*) count 
                 FROM action a
-                WHERE time >={$dateFrom}
-                AND time <= {$dateTo}";
+                WHERE time >= '{$dateFrom}'
+                AND time <= '{$dateTo}'";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $res = $stmt->fetchAll();
