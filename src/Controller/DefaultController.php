@@ -25,11 +25,8 @@ class DefaultController extends AbstractController
     {
         file_put_contents(__DIR__ . '/request_dump', $request->getContent());
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
-
         $token = $config['telegram_api_token'];
         $telegramApi = new TelegramBot($token);
-        $request = file_get_contents('php://input');
-        $request = json_decode($request);
 
         $update = $request;
 
