@@ -42,11 +42,18 @@ class MorningUpdateCommand extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine');
         $conn = $em->getConnection();
-        $sql = 'SELECT count(*) from action a';
+        $date = new \DateTime();
+        $dateFrom = $date->setTime(0, 0, 0)->format('Y-m-d h:i:s');
+        $dateTo = $date->setTime(23, 59, 59)->format('Y-m-d h:i:s');
+        $sql = "SELECT 
+                  count(*) count 
+                FROM action a
+                WHERE time >={$dateFrom}
+                AND time <= {$dateTo}";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $res = $stmt->fetchAll();
-        $telegramApi->sendMessage(7699150, $res['count']);
-        $output->writeln(json_encode($res));
+        $telegramApi->sendMessage(7699150, 'Вчера бот был использован - ' . $res['count'] . 'раз(а)');
+        $output->writeln($res['count']);
     }
 }
