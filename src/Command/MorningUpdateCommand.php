@@ -39,6 +39,14 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $sql = 'SELECT count(*) from action a';
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+
+        $em = $this->getContainer()->get('doctrine');
+        $conn = $em->getConnection();
+        $sql = 'SELECT count(*) from action a';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll();
+        $telegramApi->sendMessage(7699150, $res['count']);
+        $output->writeln(json_encode($res));
     }
 }
