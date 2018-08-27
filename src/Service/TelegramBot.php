@@ -103,7 +103,7 @@ class TelegramBot
         $content = array(
             'chat_id' => $chatId,
             'reply_markup' => $encodedMarkup,
-            'text' => 'Calls Count'
+            'text' => ' '
         );
 
         try {
