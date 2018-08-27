@@ -8,8 +8,6 @@
 
 namespace App\Service;
 
-//use GuzzleHttp\Client;
-use Monolog\Logger;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -45,12 +43,11 @@ class TelegramBot
     /**
      * @param string $method
      * @param array $params
-     * @return \stdClass
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed|JsonResponse
+     * @throws GuzzleException
      */
-    protected function query(string $method, array $params = []): \stdClass
+    protected function query(string $method, array $params = [])
     {
-        $response = new \stdClass();
         try {
             $url = self::TELEGRAM_API_URL . $this->token . '/' . $method;
             if (!empty($params)) {
@@ -79,6 +76,30 @@ class TelegramBot
         try {
             $response = $this->query('sendMessage', [
                 'text' => $text,
+                'chat_id' => $chatId
+            ]);
+        } catch (GuzzleException $exception) {
+            throw new  \Exception();
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param int $chatId
+     * @return mixed|\stdClass|JsonResponse
+     * @throws \Exception
+     */
+    public function sendKeyboard(int $chatId)
+    {
+        $response = new \stdClass();
+        try {
+            $response = $this->query('ReplyKeyboardMarkup', [
+                'keyboard' => [
+                    [
+                        'text' => '/call_count',
+                    ]
+                ],
                 'chat_id' => $chatId
             ]);
         } catch (GuzzleException $exception) {
