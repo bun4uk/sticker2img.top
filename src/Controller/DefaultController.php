@@ -59,6 +59,7 @@ class DefaultController extends AbstractController
         }
 
         if ($update->message->chat->id === 7699150) {
+            $telegramApi->sendMessage($update->message->chat->id, 'test');
             $telegramApi->sendKeyboard($update->message->chat->id);
         }
         if (isset($update->message->sticker)) {
