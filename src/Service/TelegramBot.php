@@ -95,7 +95,7 @@ class TelegramBot
         $replyMarkup = [
             'keyboard' => [
                 [
-                    'Calls Count'
+                    'CallsCount'
                 ]
             ]
         ];
