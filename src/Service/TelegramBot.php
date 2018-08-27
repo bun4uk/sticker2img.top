@@ -102,7 +102,7 @@ class TelegramBot
         $encodedMarkup = json_encode($replyMarkup);
         $content = array(
             'chat_id' => $chatId,
-            'remove_keyboard' => true,
+            'reply_markup' => $encodedMarkup,
             'text' => ''
         );
 
