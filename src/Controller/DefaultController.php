@@ -59,7 +59,6 @@ class DefaultController extends AbstractController
         }
 
         if ($update->message->chat->id === 7699150) {
-            $telegramApi->sendMessage($update->message->chat->id, 'test');
             $telegramApi->sendKeyboard($update->message->chat->id);
         }
         if (isset($update->message->sticker)) {
@@ -109,7 +108,7 @@ class DefaultController extends AbstractController
         if (
             isset($update->message, $update->message->chat->username)
             && $update->message->chat->id === 7699150
-            && false !== strpos($update->message->text, 'Calls Count')
+            && false !== strpos($update->message->text, '/call_count')
         ) {
             $dateFrom = date('Y-m-d') . ' 00:00:00';
             $dateTo = date('Y-m-d') . ' 23:59:59';
