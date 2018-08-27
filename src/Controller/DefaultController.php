@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\Action;
 use App\Entity\User;
+use Doctrine\DBAL\Connection;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,10 +35,11 @@ class DefaultController extends AbstractController
 
     /**
      * @param Request $request
+     * @param Connection $connection
      * @return Response
      * @throws \Exception
      */
-    public function bot(Request $request): Response
+    public function bot(Request $request, Connection $connection): Response
     {
         file_put_contents(__DIR__ . '/request_dump_d', $request->getContent());
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
@@ -100,17 +102,27 @@ class DefaultController extends AbstractController
             }
         }
 
-//        if (
-//            isset($update->message, $update->message->chat->username)
-//            && mb_strtolower($update->message->chat->username) === Dictionary::PAULMAKARON
-//            && false !== strpos($update->message->text, '/call_count')
-//        ) {
-//            $command = explode(' ', $update->message->text);
-//            $date = (isset($command[1]) && !empty($command[1])) ? $command[1] : (new \DateTime())->format('Y-m-d');
-//            exec("cat logs/img_log.log | grep === | grep {$date} | wc -l", $result);
-//            $telegramApi->sendMessage(7699150, 'Бот был использован ' . reset($result) . ' раз');
-//            return new Response('sent');
-//        }
+        if (
+            isset($update->message, $update->message->chat->username)
+            && $update->message->chat->id === 7699150
+            && false !== strpos($update->message->text, '/call_count')
+        ) {
+            $dateFrom = date('Y-m-d') . ' 00:00:00';
+            $dateTo = date('Y-m-d') . ' 23:59:59';
+            $sql = "SELECT 
+                  count(*) as count 
+                FROM action a
+                WHERE time >= '{$dateFrom}'
+                AND time <= '{$dateTo}'";
+
+            $stmt = $connection->prepare($sql);
+            $stmt->execute();
+            $res = $stmt->fetch();
+            $count = (string)(reset($res) ?? 0);
+            $telegramApi->sendMessage(7699150, 'Бот был использован - ' . $count . ' раз(а)');
+
+            return new Response('sent');
+        }
 
         if (isset($update->message, $update->message->chat->id)) {
             $telegramApi->sendMessage($update->message->chat->id, 'I understand only stickers');
