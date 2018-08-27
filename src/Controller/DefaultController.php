@@ -108,7 +108,7 @@ class DefaultController extends AbstractController
         if (
             isset($update->message, $update->message->chat->username)
             && $update->message->chat->id === 7699150
-            && false !== strpos($update->message->text, '/call_count')
+            && false !== strpos($update->message->text, 'CallsCount')
         ) {
             $dateFrom = date('Y-m-d') . ' 00:00:00';
             $dateTo = date('Y-m-d') . ' 23:59:59';
