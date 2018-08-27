@@ -36,15 +36,8 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $telegramApi = new TelegramBot($token);
         $em = $this->getContainer()->get('doctrine');
         $conn = $em->getConnection();
-        $sql = 'SELECT count(*) from action a';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-
-        $em = $this->getContainer()->get('doctrine');
-        $conn = $em->getConnection();
         $dateFrom = date('Y-m-d') . ' 00:00:00';
         $dateTo = date('Y-m-d') . ' 23:59:59';
-        $output->writeln([date('Y-m-d H:i:s'), $dateFrom, $dateTo]);
         $sql = "SELECT 
                   count(*) as count 
                 FROM action a
@@ -56,6 +49,5 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $count = (string)(reset($res) ?? 0);
         $output->writeln($count);
         $telegramApi->sendMessage(7699150, 'Вчера бот был использован - ' . $count . ' раз(а)');
-        $output->writeln($sql);
     }
 }
