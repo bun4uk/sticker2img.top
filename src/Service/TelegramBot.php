@@ -87,21 +87,27 @@ class TelegramBot
 
     /**
      * @param int $chatId
-     * @return mixed|\stdClass|JsonResponse
+     * @return mixed|JsonResponse
      * @throws \Exception
      */
     public function sendKeyboard(int $chatId)
     {
-        $response = new \stdClass();
+        $replyMarkup = [
+            'keyboard' => [
+                [
+                    '/call_count'
+                ]
+            ]
+        ];
+        $encodedMarkup = json_encode($replyMarkup);
+        $content = array(
+            'chat_id' => $chatId,
+            'reply_markup' => $encodedMarkup,
+            'text' => 'Calls Count'
+        );
+
         try {
-            $response = $this->query('ReplyKeyboardMarkup', [
-                'keyboard' => [
-                    [
-                        'text' => '/call_count',
-                    ]
-                ],
-                'chat_id' => $chatId
-            ]);
+            $response = $this->query('ReplyKeyboardMarkup', $content);
         } catch (GuzzleException $exception) {
             throw new  \Exception();
         }
