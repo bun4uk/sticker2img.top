@@ -95,7 +95,7 @@ class TelegramBot
         $replyMarkup = [
             'keyboard' => [
                 [
-                    '/call_count'
+                    'Calls Count'
                 ]
             ]
         ];
@@ -103,11 +103,11 @@ class TelegramBot
         $content = array(
             'chat_id' => $chatId,
             'reply_markup' => $encodedMarkup,
-            'text' => 'Calls Count'
+            'text' => ''
         );
 
         try {
-            $response = $this->query('ReplyKeyboardMarkup', $content);
+            $response = $this->query('sendMessage', $content);
         } catch (GuzzleException $exception) {
             throw new  \Exception();
         }
