@@ -42,13 +42,10 @@ class MorningUpdateCommand extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine');
         $conn = $em->getConnection();
-        //$date = new \DateTime('NOW');
         $dateFrom = date('Y-m-d') . ' 00:00:00';
         $dateTo = date('Y-m-d') . ' 23:59:59';
-
-$output->writeln([date('Y-m-d H:i:s'), $dateFrom, $dateTo]);        
-
-$sql = "SELECT 
+        $output->writeln([date('Y-m-d H:i:s'), $dateFrom, $dateTo]);
+        $sql = "SELECT 
                   count(*) as count 
                 FROM action a
                 WHERE time >= '{$dateFrom}'
