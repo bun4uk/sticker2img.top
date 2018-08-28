@@ -41,14 +41,13 @@ class DefaultController extends AbstractController
      */
     public function answer(Request $request, Connection $connection): Response
     {
-        file_put_contents(__DIR__ . '/request_dump_d', $request->getContent());
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
         $token = $config['telegram_api_token'];
         $telegramApi = new TelegramBot($token);
         $update = json_decode($request->getContent());
-        if (!$update) {
-            throw new NotFoundHttpException();
-        }
+//        if (!$update) {
+//            throw new NotFoundHttpException();
+//        }
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $entityManager = $this->getDoctrine()->getManager();
         $user = $userRepository->findOneBy(['chatId' => $update->message->chat->id]);
