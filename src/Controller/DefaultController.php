@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function bot(Request $request, Connection $connection): Response
+    public function answer(Request $request, Connection $connection): Response
     {
         file_put_contents(__DIR__ . '/request_dump_d', $request->getContent());
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
