@@ -36,8 +36,9 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $telegramApi = new TelegramBot($token);
         $em = $this->getContainer()->get('doctrine');
         $conn = $em->getConnection();
-        $dateFrom = date('Y-m-d') . ' 00:00:00';
-        $dateTo = date('Y-m-d') . ' 23:59:59';
+        $date = (new \DateTime('YESTERDAY'))->format('Y-m-d');
+        $dateFrom = $date . ' 00:00:00';
+        $dateTo = $date . ' 23:59:59';
         $sql = "SELECT 
                   count(*) as count 
                 FROM action a
