@@ -42,7 +42,6 @@ class DefaultController extends AbstractController
      */
     public function answer(Request $request, Connection $connection, TelegramBot $telegramApi): Response
     {
-        file_put_contents(__DIR__ . '/request_dump_d', $request->getContent());
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
         $update = json_decode($request->getContent());
 //        if (!$update) {

@@ -1,6 +1,6 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
-bot:
-    path: /bot
-    controller: App\Controller\DefaultController::bot
+answer:
+    path: /answer
+    controller: App\Controller\DefaultController::answer
