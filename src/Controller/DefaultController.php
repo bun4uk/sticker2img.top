@@ -36,14 +36,13 @@ class DefaultController extends AbstractController
     /**
      * @param Request $request
      * @param Connection $connection
+     * @param TelegramBot $telegramApi
      * @return Response
-     * @throws \Exception
+     * @throws \Doctrine\DBAL\DBALException
      */
-    public function answer(Request $request, Connection $connection): Response
+    public function answer(Request $request, Connection $connection, TelegramBot $telegramApi): Response
     {
         $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
-        $token = $config['telegram_api_token'];
-        $telegramApi = new TelegramBot($token);
         $update = json_decode($request->getContent());
 //        if (!$update) {
 //            throw new NotFoundHttpException();
@@ -78,7 +77,7 @@ class DefaultController extends AbstractController
                 $telegramApi->sendMessage($update->message->chat->id, 'I\'ve got your sticker');
                 $telegramApi->sendMessage($update->message->chat->id, '...');
                 $file = $telegramApi->getFile($update->message->sticker);
-                $filePath = "https://api.telegram.org/file/bot$token/" . $file->file_path;
+                $filePath = "https://api.telegram.org/file/bot{$_SERVER['TELEGRAM_API_TOKEN']}/" . $file->file_path;
                 $fileName = '/var/www/sticker2img.top/public/files/img_' . time() . mt_rand();
                 $imgPathWebp = $fileName . '.webp';
                 copy(
