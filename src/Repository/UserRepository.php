@@ -36,15 +36,17 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+//    /**
+//     * @param int $chatId
+//     * @return User|null
+//     * @throws \Doctrine\ORM\NonUniqueResultException
+//     */
+//    public function find(int $chatId): ?User
+//    {
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.chatId = :val')
+//            ->setParameter('val', $chatId)
+//            ->getQuery()
+//            ->getOneOrNullResult();
+//    }
 }
