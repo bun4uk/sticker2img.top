@@ -18,11 +18,11 @@ class TelegramBot
 {
     /**
      * TelegramBot constructor.
-     * @param string $token
+     * @param string $telegramApiToken
      */
-    public function __construct(string $token)
+    public function __construct(string $telegramApiToken)
     {
-        $this->token = $token;
+        $this->token = $telegramApiToken;
     }
 
     /**
@@ -161,7 +161,7 @@ class TelegramBot
 
         $post_fields = [
             'chat_id' => $chatId,
-            'document' => new CURLFile(realpath($document)),
+            'document' => new \CURLFile(realpath($document)),
             'caption' => $caption
         ];
 
