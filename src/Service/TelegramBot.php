@@ -161,7 +161,7 @@ class TelegramBot
 
         $post_fields = [
             'chat_id' => $chatId,
-            'document' => new CURLFile(realpath($document)),
+            'document' => new \CURLFile(realpath($document)),
             'caption' => $caption
         ];
 
