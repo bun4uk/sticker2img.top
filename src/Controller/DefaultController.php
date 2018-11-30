@@ -107,7 +107,7 @@ class DefaultController extends AbstractController
             $dateFrom = date('Y-m-d') . ' 00:00:00';
             $dateTo = date('Y-m-d') . ' 23:59:59';
             $sql = "SELECT 
-                  count(*) as count 
+                  count(*) AS count 
                 FROM action a
                 WHERE time >= '{$dateFrom}'
                 AND time <= '{$dateTo}'";

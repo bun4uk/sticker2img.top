@@ -17,6 +17,17 @@ use App\Service\TelegramBot;
 
 class MorningUpdateCommand extends ContainerAwareCommand
 {
+    /**
+     * @var TelegramBot
+     */
+    private $telegramApi;
+
+    public function __construct(?string $name = null, TelegramBot $telegramApi)
+    {
+        parent::__construct($name);
+        $this->telegramApi = $telegramApi;
+    }
+
     protected function configure(): void
     {
         $this
@@ -31,9 +42,9 @@ class MorningUpdateCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
-        $token = $config['telegram_api_token'];
-        $telegramApi = new TelegramBot($token);
+//        $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
+//        $token = $config['telegram_api_token'];
+//        $telegramApi = new TelegramBot($token);
         $em = $this->getContainer()->get('doctrine');
         $conn = $em->getConnection();
         $date = (new \DateTime('YESTERDAY'))->format('Y-m-d');
@@ -49,6 +60,6 @@ class MorningUpdateCommand extends ContainerAwareCommand
         $res = $stmt->fetch();
         $count = (string)(reset($res) ?? 0);
         $output->writeln($count);
-        $telegramApi->sendMessage(7699150, 'Вчера бот был использован - ' . $count . ' раз(а)');
+        $this->telegramApi->sendMessage(7699150, 'Вчера бот был использован - ' . $count . ' раз(а)');
     }
 }
