@@ -22,10 +22,14 @@ class MorningUpdateCommand extends ContainerAwareCommand
      */
     private $telegramApi;
 
-    public function __construct(?string $name = null, TelegramBot $telegramApi)
+    /**
+     * MorningUpdateCommand constructor.
+     * @param string|null $name
+     */
+    public function __construct(?string $name = null)
     {
         parent::__construct($name);
-        $this->telegramApi = $telegramApi;
+        $this->telegramApi = $this->getContainer()->get('App\Service\TelegramBot');
     }
 
     protected function configure(): void
