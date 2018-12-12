@@ -75,11 +75,12 @@ class DefaultController extends AbstractController
                 $file = $telegramApi->getFile($update->message->sticker);
                 $filePath = "https://api.telegram.org/file/bot{$_SERVER['TELEGRAM_API_TOKEN']}/" . $file->file_path;
                 $fileName = '/var/www/sticker2img.top/public/files/img_' . time() . mt_rand();
-                $imgPathWebp = $fileName . '.png';
+                $imgPathWebp = $fileName . '.webp';
                 copy(
                     $filePath,
                     $imgPathWebp
                 );
+                $telegramApi->sendPhoto($update->message->chat->id, $imgPathWebp);
                 $telegramApi->sendDocument($update->message->chat->id, $imgPathWebp);
                 unlink($imgPathWebp);
 
