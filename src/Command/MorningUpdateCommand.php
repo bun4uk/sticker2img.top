@@ -22,17 +22,6 @@ class MorningUpdateCommand extends ContainerAwareCommand
      */
     private $telegramApi;
 
-    /**
-     * MorningUpdateCommand constructor.
-     * @param string|null $name
-     * @param TelegramBot $telegramApi
-     */
-    public function __construct(?string $name = null, TelegramBot $telegramApi)
-    {
-        parent::__construct($name);
-        $this->telegramApi = $telegramApi;
-    }
-
     protected function configure(): void
     {
         $this
@@ -49,7 +38,7 @@ class MorningUpdateCommand extends ContainerAwareCommand
     {
 //        $config = parse_ini_file('/var/www/sticker2img.top/config/config.ini');
 //        $token = $config['telegram_api_token'];
-//        $telegramApi = new TelegramBot($token);
+        $this->telegramApi = new TelegramBot(getenv('TELEGRAM_API_TOKEN'));
         $em = $this->getContainer()->get('doctrine');
         $conn = $em->getConnection();
         $date = (new \DateTime('YESTERDAY'))->format('Y-m-d');

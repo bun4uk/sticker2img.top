@@ -23,9 +23,6 @@ class TelegramBot
      */
     public function __construct(string $telegramApiToken)
     {
-
-        print_r($telegramApiToken); die;
-
         $this->token = $telegramApiToken;
     }
 
