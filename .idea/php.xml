@@ -70,5 +70,10 @@
       <path value="$PROJECT_DIR$/vendor/cron/cron" />
     </include_path>
   </component>
+  <component name="PhpInterpreters">
+    <interpreters>
+      <interpreter home="$USER_HOME$/Library/Caches/PhpStorm2018.3/plugins/idea-php-latest-plugin/php-v7.2.12/php.sh" id="b2503663-1cc5-4da1-beff-3ff815c896bc" name="PHP latest" debugger_id="php.debugger.XDebug" />
+    </interpreters>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
 </project>

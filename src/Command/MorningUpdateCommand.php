@@ -17,20 +17,21 @@ use App\Service\TelegramBot;
 
 class MorningUpdateCommand extends ContainerAwareCommand
 {
-//    /**
-//     * @var TelegramBot
-//     */
-//    private $telegramApi;
-//
-//    /**
-//     * MorningUpdateCommand constructor.
-//     * @param string|null $name
-//     */
-//    public function __construct(?string $name = null)
-//    {
-//        parent::__construct($name);
-//        $this->telegramApi = $this->getContainer()->get('App\Service\TelegramBot');
-//    }
+    /**
+     * @var TelegramBot
+     */
+    private $telegramApi;
+
+    /**
+     * MorningUpdateCommand constructor.
+     * @param string|null $name
+     * @param TelegramBot $telegramApi
+     */
+    public function __construct(?string $name = null, TelegramBot $telegramApi)
+    {
+        parent::__construct($name);
+        $this->telegramApi = $telegramApi;
+    }
 
     protected function configure(): void
     {
