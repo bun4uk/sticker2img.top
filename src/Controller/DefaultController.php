@@ -81,7 +81,7 @@ class DefaultController extends AbstractController
                     $imgPathWebp
                 );
                 $telegramApi->sendPhoto($update->message->chat->id, $imgPathWebp);
-                $telegramApi->sendDocument($update->message->chat->id, $imgPathWebp);
+                $telegramApi->sendMessage($update->message->chat->id, $filePath);
                 unlink($imgPathWebp);
 
                 $action = new Action();
