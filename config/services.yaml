@@ -33,4 +33,5 @@ services:
 
     App\Service\TelegramBot:
         arguments:
-            $telegramApiToken: "%env(TELEGRAM_API_TOKEN)%"
+            $telegramApiToken:
+                - "%env(TELEGRAM_API_TOKEN)%"
