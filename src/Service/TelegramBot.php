@@ -8,6 +8,7 @@
 
 namespace App\Service;
 
+use function Couchbase\defaultDecoder;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -22,6 +23,9 @@ class TelegramBot
      */
     public function __construct(string $telegramApiToken)
     {
+
+        print_r($telegramApiToken); die;
+
         $this->token = $telegramApiToken;
     }
 
