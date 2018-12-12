@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0977d86c-7b39-4850-a3e3-7ac246b99e55" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command/MorningUpdateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/MorningUpdateCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/TelegramBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/TelegramBot.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="109" selection-start-line="109" selection-end-line="109" />
+            <state relative-caret-position="178">
+              <caret line="50" column="47" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
               <folding>
                 <element signature="e#114#136#0#PHP" expanded="true" />
               </folding>
@@ -32,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/services.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="36" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+            <state relative-caret-position="360">
+              <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -44,10 +43,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Service/TelegramBot.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+            <state relative-caret-position="195">
+              <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
               <folding>
-                <element signature="e#112#150#0#PHP" expanded="true" />
+                <element signature="e#112#153#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -62,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Command/MorningUpdateCommand.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="40" column="74" lean-forward="true" selection-start-line="40" selection-start-column="74" selection-end-line="40" selection-end-column="74" />
+            <state relative-caret-position="409">
+              <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
               <folding>
                 <element signature="e#112#134#0#PHP" expanded="true" />
               </folding>
@@ -126,9 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>webp</find>
-      <find>sendDocument</find>
-      <find>call</find>
       <find>db</find>
       <find>connec</find>
       <find>$connection</find>
@@ -150,18 +146,21 @@
       <find>$telegramApiToken</find>
       <find>$telegramBotApi</find>
       <find>co</find>
-      <find>$telegramApi</find>
       <find>$application-&gt;run</find>
       <find>command</find>
-      <find>token</find>
       <find>send</find>
       <find>telegramApi</find>
+      <find>callscount</find>
+      <find>TelegramBot</find>
+      <find>$telegramApi</find>
+      <find>t</find>
+      <find>token</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/.git</dir>
-      <dir>$PROJECT_DIR$/config</dir>
       <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/config</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -183,9 +182,9 @@
         <option value="$PROJECT_DIR$/src/Repository/UserRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/bin/console" />
-        <option value="$PROJECT_DIR$/config/services.yaml" />
-        <option value="$PROJECT_DIR$/src/Service/TelegramBot.php" />
         <option value="$PROJECT_DIR$/src/Command/MorningUpdateCommand.php" />
+        <option value="$PROJECT_DIR$/src/Service/TelegramBot.php" />
+        <option value="$PROJECT_DIR$/config/services.yaml" />
       </list>
     </option>
   </component>
@@ -268,68 +267,6 @@
               <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
               <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Command" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sticker2img.top" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sticker2img.top" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -390,18 +327,18 @@
       <workItem from="1538743347525" duration="526000" />
       <workItem from="1543410757074" duration="948000" />
       <workItem from="1543580715459" duration="2378000" />
-      <workItem from="1544634733392" duration="746000" />
+      <workItem from="1544634733392" duration="1068000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37443000" />
+    <option name="totallyTimeSpent" value="37765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27382874" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18578352" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -414,7 +351,7 @@
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49676898" visible="true" weight="0.22191781" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49676898" weight="0.22191781" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.503231" side_tool="true" weight="0.5493151" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -608,10 +545,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Command/MorningUpdateCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
+          <folding>
+            <element signature="e#112#134#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/TelegramBot.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding>
+            <element signature="e#112#153#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="109" selection-start-line="109" selection-end-line="109" />
+        <state relative-caret-position="178">
+          <caret line="50" column="47" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
           <folding>
             <element signature="e#114#136#0#PHP" expanded="true" />
           </folding>
@@ -620,28 +577,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="36" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/TelegramBot.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding>
-            <element signature="e#112#150#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Command/MorningUpdateCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="40" column="74" lean-forward="true" selection-start-line="40" selection-start-column="74" selection-end-line="40" selection-end-column="74" />
-          <folding>
-            <element signature="e#112#134#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="360">
+          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
         </state>
       </provider>
     </entry>

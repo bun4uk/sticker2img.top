@@ -8,7 +8,6 @@
 
 namespace App\Service;
 
-use function Couchbase\defaultDecoder;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
