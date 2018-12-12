@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0977d86c-7b39-4850-a3e3-7ac246b99e55" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/TelegramBot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/TelegramBot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="50" column="47" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
+            <state relative-caret-position="293">
+              <caret line="82" column="43" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="43" />
               <folding>
                 <element signature="e#114#136#0#PHP" expanded="true" />
               </folding>
@@ -31,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/services.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+            <state relative-caret-position="146">
+              <caret line="16" column="30" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -43,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Service/TelegramBot.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+            <state relative-caret-position="338">
+              <caret line="162" column="33" lean-forward="true" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
               <folding>
                 <element signature="e#112#153#0#PHP" expanded="true" />
               </folding>
@@ -64,7 +63,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Command/MorningUpdateCommand.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
+            <state relative-caret-position="548">
               <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
               <folding>
                 <element signature="e#112#134#0#PHP" expanded="true" />
@@ -125,7 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>db</find>
       <find>connec</find>
       <find>$connection</find>
       <find>$config</find>
@@ -143,7 +141,6 @@
       <find>api</find>
       <find>en</find>
       <find>env</find>
-      <find>$telegramApiToken</find>
       <find>$telegramBotApi</find>
       <find>co</find>
       <find>$application-&gt;run</find>
@@ -155,6 +152,8 @@
       <find>$telegramApi</find>
       <find>t</find>
       <find>token</find>
+      <find>$telegramApiToken</find>
+      <find>$imgPathWebp</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/.git</dir>
@@ -180,11 +179,11 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Repository/UserRepository.php" />
-        <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/bin/console" />
         <option value="$PROJECT_DIR$/src/Command/MorningUpdateCommand.php" />
-        <option value="$PROJECT_DIR$/src/Service/TelegramBot.php" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
+        <option value="$PROJECT_DIR$/src/Service/TelegramBot.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
       </list>
     </option>
   </component>
@@ -327,18 +326,18 @@
       <workItem from="1538743347525" duration="526000" />
       <workItem from="1543410757074" duration="948000" />
       <workItem from="1543580715459" duration="2378000" />
-      <workItem from="1544634733392" duration="1068000" />
+      <workItem from="1544634733392" duration="1537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37765000" />
+    <option name="totallyTimeSpent" value="38234000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18578352" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18578352" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -545,9 +544,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Command/MorningUpdateCommand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
+        <state relative-caret-position="548">
           <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
           <folding>
             <element signature="e#112#134#0#PHP" expanded="true" />
@@ -557,8 +563,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Service/TelegramBot.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+        <state relative-caret-position="338">
+          <caret line="162" column="33" lean-forward="true" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
           <folding>
             <element signature="e#112#153#0#PHP" expanded="true" />
           </folding>
@@ -567,18 +573,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="50" column="47" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
+        <state relative-caret-position="293">
+          <caret line="82" column="43" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="43" />
           <folding>
             <element signature="e#114#136#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
         </state>
       </provider>
     </entry>
