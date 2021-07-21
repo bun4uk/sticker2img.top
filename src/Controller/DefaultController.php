@@ -65,21 +65,21 @@ class DefaultController extends AbstractController
 
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $entityManager = $this->getDoctrine()->getManager();
-        $user = $userRepository->findOneBy(['chatId' => $update->message->chat->id]);
-
+        $chatId = $update->message->chat->id > 0 ? $update->message->chat->id : $update->message->from->id;
+        $user = $userRepository->findOneBy(['chatId' => $chatId]);
         if (isset($update->message->text) && false !== strpos($update->message->text, 'start')) {
-            $telegramApi->sendMessage($update->message->chat->id, 'Hi there! I\'m Sticker2Image bot. I\'ll help you to convert your stickers to PNG images. Just send me some sticker.');
+            $telegramApi->sendMessage($chatId, 'Hi there! I\'m Sticker2Image bot. I\'ll help you to convert your stickers to PNG images. Just send me some sticker.');
             return new Response('sent');
         }
 
-        if ($update->message->chat->id === 7699150) {
-            $telegramApi->sendKeyboard($update->message->chat->id);
+        if ($chatId === 7699150) {
+            $telegramApi->sendKeyboard($chatId);
         }
         if (isset($update->message->sticker)) {
             if (!$user) {
 
                 $user = new User();
-                $user->setChatId($update->message->chat->id);
+                $user->setChatId($chatId);
                 $user->setUsername($update->message->chat->username ?? $update->message->from->username ?? null);
                 $user->setFirstname($update->message->chat->first_name ?? $update->message->from->first_name ?? null);
                 $user->setLastname($update->message->chat->last_name ?? $update->message->from->last_name ?? null);
@@ -91,8 +91,8 @@ class DefaultController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             try {
-                $telegramApi->sendMessage($update->message->chat->id, 'I\'ve got your sticker');
-                $telegramApi->sendMessage($update->message->chat->id, '...');
+                $telegramApi->sendMessage($chatId, 'I\'ve got your sticker');
+                $telegramApi->sendMessage($chatId, '...');
                 $file = $telegramApi->getFile($update->message->sticker);
                 $filePath = "https://api.telegram.org/file/bot{$_SERVER['TELEGRAM_API_TOKEN']}/" . $file->file_path;
                 $fileName = __DIR__ . '/../../public/files/img_' . time() . mt_rand();
@@ -101,11 +101,11 @@ class DefaultController extends AbstractController
                     $filePath,
                     $imgPathWebp
                 );
-                $telegramApi->sendPhoto($update->message->chat->id, $imgPathWebp);
+                $telegramApi->sendPhoto($chatId, $imgPathWebp);
                 unlink($imgPathWebp);
 
                 $action = new Action();
-                $action->setChatId($update->message->chat->id);
+                $action->setChatId($chatId);
                 $action->setSetName($update->message->sticker->set_name ?? null);
                 $action->setFileId($update->message->sticker->file_id ?? null);
                 $action->setFilePath($file->file_path);
@@ -115,7 +115,7 @@ class DefaultController extends AbstractController
                 return new Response('sent');
 
             } catch (\Exception $exception) {
-                $telegramApi->sendMessage($update->message->chat->id, 'Sorry, I am tired. Some server error. Try in a few minutes :\'( ');
+                $telegramApi->sendMessage($chatId, 'Sorry, I am tired. Some server error. Try in a few minutes :\'( ');
                 $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
 
                 return new Response('server_error');
@@ -124,7 +124,7 @@ class DefaultController extends AbstractController
 
         if (
             isset($update->message, $update->message->chat->username)
-            && $update->message->chat->id === 7699150
+            && $chatId === 7699150
             && false !== strpos($update->message->text, 'CallsCount')
         ) {
             $dateFrom = date('Y-m-d') . ' 00:00:00';
@@ -144,8 +144,8 @@ class DefaultController extends AbstractController
             return new Response('sent');
         }
 
-        if (isset($update->message, $update->message->chat->id)) {
-            $telegramApi->sendMessage($update->message->chat->id, 'I understand only stickers');
+        if (isset($update->message, $chatId)) {
+            $telegramApi->sendMessage($chatId, 'I understand only stickers');
         }
 
         return new Response('sent', 200);
