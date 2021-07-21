@@ -43,6 +43,11 @@ class DefaultController extends AbstractController
     public function answer(Request $request, Connection $connection, TelegramBot $telegramApi): Response
     {
         $update = json_decode($request->getContent());
+
+        if (!property_exists($update, 'message')) {
+            die('pzdc');
+        }
+
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $entityManager = $this->getDoctrine()->getManager();
         $user = $userRepository->findOneBy(['chatId' => $update->message->chat->id]);
@@ -74,7 +79,7 @@ class DefaultController extends AbstractController
                 $telegramApi->sendMessage($update->message->chat->id, '...');
                 $file = $telegramApi->getFile($update->message->sticker);
                 $filePath = "https://api.telegram.org/file/bot{$_SERVER['TELEGRAM_API_TOKEN']}/" . $file->file_path;
-                $fileName = '/var/www/sticker2img.top/public/files/img_' . time() . mt_rand();
+                $fileName = __DIR__ . '/../../public/files/img_' . time() . mt_rand();
                 $imgPathWebp = $fileName . '.webp';
                 copy(
                     $filePath,
