@@ -60,6 +60,7 @@ class DefaultController extends AbstractController
 
         if (!property_exists($update, 'message')) {
             $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
+            die;
         }
 
         $userRepository = $this->getDoctrine()->getRepository(User::class);
