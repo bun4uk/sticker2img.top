@@ -30,7 +30,21 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        throw new NotFoundHttpException();
+        echo '<!doctype html>
+<html lang="en">
+<head>
+<meta author="vasili">
+<title>Zdarova bandity!</title>
+</head>
+<body>
+<h1>Zdarova bandity!</h1>
+<p>Kak dela?</p>
+<script async src="https://cdn.onthe.io/io.js/9FPVkP4NHVls"></script>
+</body>
+</html>
+';
+        die;
+//        throw new NotFoundHttpException();
     }
 
     /**
