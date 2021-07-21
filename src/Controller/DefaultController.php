@@ -77,6 +77,8 @@ class DefaultController extends AbstractController
         }
         if (isset($update->message->sticker)) {
             if (!$user) {
+                $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
+
                 $user = new User();
                 $user->setChatId($update->message->chat->id);
                 $user->setUsername($update->message->chat->username ?? null);
