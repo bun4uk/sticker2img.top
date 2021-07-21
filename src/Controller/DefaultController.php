@@ -77,13 +77,12 @@ class DefaultController extends AbstractController
         }
         if (isset($update->message->sticker)) {
             if (!$user) {
-                $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
 
                 $user = new User();
                 $user->setChatId($update->message->chat->id);
-                $user->setUsername($update->message->chat->username ?? null);
-                $user->setFirstname($update->message->chat->first_name ?? null);
-                $user->setLastname($update->message->chat->last_name ?? null);
+                $user->setUsername($update->message->chat->username ?? $update->message->from->username ?? null);
+                $user->setFirstname($update->message->chat->first_name ?? $update->message->from->first_name ?? null);
+                $user->setLastname($update->message->chat->last_name ?? $update->message->from->last_name ?? null);
                 $user->setFirstLaunch(new \DateTime());
 
                 $telegramApi->sendMessage(7699150, 'New user ' . $user->getFirstname() . ' ' . $user->getLastname() . ' @' . $user->getUsername());
@@ -117,6 +116,8 @@ class DefaultController extends AbstractController
 
             } catch (\Exception $exception) {
                 $telegramApi->sendMessage($update->message->chat->id, 'Sorry, I am tired. Some server error. Try in a few minutes :\'( ');
+                $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
+
                 return new Response('server_error');
             }
         }
