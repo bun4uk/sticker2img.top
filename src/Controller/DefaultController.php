@@ -10,8 +10,14 @@ namespace App\Controller;
 
 use App\Entity\Action;
 use App\Entity\User;
+use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Exception;
+use FilesystemIterator;
 use Psr\Container\NotFoundExceptionInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,7 +58,8 @@ class DefaultController extends AbstractController
      * @param Connection $connection
      * @param TelegramBot $telegramApi
      * @return Response
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function answer(Request $request, Connection $connection, TelegramBot $telegramApi): Response
     {
@@ -83,11 +90,11 @@ class DefaultController extends AbstractController
                 $user->setUsername($update->message->chat->username ?? $update->message->from->username ?? null);
                 $user->setFirstname($update->message->chat->first_name ?? $update->message->from->first_name ?? null);
                 $user->setLastname($update->message->chat->last_name ?? $update->message->from->last_name ?? null);
-                $user->setFirstLaunch(new \DateTime());
+                $user->setFirstLaunch(new DateTime());
 
                 $telegramApi->sendMessage(7699150, 'New user ' . $user->getFirstname() . ' ' . $user->getLastname() . ' @' . $user->getUsername());
             }
-            $user->setLastAction(new \DateTime());
+            $user->setLastAction(new DateTime());
             $entityManager->persist($user);
             $entityManager->flush();
             try {
@@ -96,13 +103,32 @@ class DefaultController extends AbstractController
                 $file = $telegramApi->getFile($update->message->sticker);
                 $filePath = "https://api.telegram.org/file/bot{$_SERVER['TELEGRAM_API_TOKEN']}/" . $file->file_path;
                 $fileName = __DIR__ . '/../../public/files/img_' . time() . mt_rand();
-                $imgPathWebp = $fileName . '.webp';
-                copy(
-                    $filePath,
-                    $imgPathWebp
-                );
-                $telegramApi->sendPhoto($chatId, $imgPathWebp);
-                unlink($imgPathWebp);
+
+                if ($update->message->sticker->is_animated) {
+                    $folder = __DIR__ . '/../../public/files/tgs/temp_folder_' . mt_rand();
+                    if (!file_exists($folder)) {
+                        mkdir($folder, 0777, true);
+                    }
+
+                    $fileName = $folder . '/img_' . time() . mt_rand();
+
+                    $imgPathTgs = $fileName . '.tgs';
+                    copy(
+                        $filePath,
+                        $imgPathTgs
+                    );
+                    exec('docker run --rm -v ' . $folder . '/:/source tgs-to-gif', $res);
+                    $telegramApi->sendDocument($chatId, $imgPathTgs . '.gif');
+                    $this->removeDir($folder);
+                } else {
+                    $imgPathWebp = $fileName . '.webp';
+                    copy(
+                        $filePath,
+                        $imgPathWebp
+                    );
+                    $telegramApi->sendPhoto($chatId, $imgPathWebp);
+                    unlink($imgPathWebp);
+                }
 
                 $action = new Action();
                 $action->setChatId($chatId);
@@ -114,7 +140,7 @@ class DefaultController extends AbstractController
 
                 return new Response('sent');
 
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 $telegramApi->sendMessage($chatId, 'Sorry, I am tired. Some server error. Try in a few minutes :\'( ');
                 $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
 
@@ -151,4 +177,20 @@ class DefaultController extends AbstractController
         return new Response('sent', 200);
     }
 
+    /**
+     * @param $target
+     */
+    private function removeDir($target)
+    {
+        $directory = new RecursiveDirectoryIterator($target, FilesystemIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                rmdir($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($target);
+    }
 }
