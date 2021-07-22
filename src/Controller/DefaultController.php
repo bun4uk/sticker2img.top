@@ -123,6 +123,7 @@ class DefaultController extends AbstractController
                     $telegramApi->sendMessage(7699150, "3");
 
                     exec('docker run --rm -v ' . $folder . '/:/source tgs-to-gif', $res);
+                    $telegramApi->sendMessage(7699150, serialize($res));
                     $telegramApi->sendMessage(7699150, "4");
 
                     $telegramApi->sendDocument($chatId, $imgPathTgs . '.gif');
