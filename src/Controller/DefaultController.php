@@ -130,7 +130,7 @@ class DefaultController extends AbstractController
                     $telegramApi->sendDocument($chatId, $imgPathTgs . '.gif');
                     $telegramApi->sendMessage(7699150, "5");
 
-                    $this->removeDir($folder);
+//                    $this->removeDir($folder);
                     $telegramApi->sendMessage(7699150, "6");
 
                 } else {
