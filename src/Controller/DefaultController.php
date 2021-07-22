@@ -106,8 +106,8 @@ class DefaultController extends AbstractController
 
                 if ($update->message->sticker->is_animated) {
                     $folder = __DIR__ . '/../../public/files/tgs/temp_folder_' . mt_rand();
-                    if (!file_exists($folder)) {
-                        mkdir($folder, 0777, true);
+                    if (!file_exists($folder) && !mkdir($folder, 0777, true) && !is_dir($folder)) {
+                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder));
                     }
 
                     $fileName = $folder . '/img_' . time() . mt_rand();
