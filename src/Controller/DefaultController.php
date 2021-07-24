@@ -105,34 +105,27 @@ class DefaultController extends AbstractController
                 $fileName = __DIR__ . '/../../public/files/img_' . time() . mt_rand();
 
                 if ($update->message->sticker->is_animated) {
-                    $telegramApi->sendMessage(7699150, "1");
-                    $folder = __DIR__ . '/../../public/files/tgs/temp_folder_' . mt_rand();
-                    if (!file_exists($folder) && !mkdir($folder, 0777, true) && !is_dir($folder)) {
-                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder));
-                    }
-                    $telegramApi->sendMessage(7699150, "2");
 
-
-                    $fileName = $folder . '/img_' . time() . mt_rand();
-
-                    $imgPathTgs = $fileName . '.tgs';
-                    copy(
-                        $filePath,
-                        $imgPathTgs
-                    );
-                    $telegramApi->sendMessage(7699150, "3");
-
-                    exec('docker run --rm -v ' . $folder . '/:/source tgs-to-gif', $res, $ebob);
-                    $telegramApi->sendMessage(7699150, $folder);
-                    $telegramApi->sendMessage(7699150, serialize($res));
-                    $telegramApi->sendMessage(7699150, serialize($ebob));
-                    $telegramApi->sendMessage(7699150, "4");
-
-                    $telegramApi->sendDocument($chatId, $imgPathTgs . '.gif');
-                    $telegramApi->sendMessage(7699150, "5");
-
-//                    $this->removeDir($folder);
-                    $telegramApi->sendMessage(7699150, "6");
+                    $telegramApi->sendMessage($chatId, 'Sorry, I can work with animated stickers yet :(');
+//                    $folder = __DIR__ . '/../../public/files/tgs/temp_folder_' . mt_rand();
+//                    if (!file_exists($folder) && !mkdir($folder, 0777, true) && !is_dir($folder)) {
+//                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder));
+//                    }
+//
+//                    $fileName = $folder . '/img_' . time() . mt_rand();
+//
+//                    $imgPathTgs = $fileName . '.tgs';
+//                    copy(
+//                        $filePath,
+//                        $imgPathTgs
+//                    );
+//
+//                    exec('docker run --rm -v ' . $folder . '/:/source tgs-to-gif', $res, $ebob);
+//                    $telegramApi->sendMessage(7699150, $folder);
+//                    $telegramApi->sendMessage(7699150, serialize($res));
+//                    $telegramApi->sendMessage(7699150, serialize($ebob));
+//
+//                    $telegramApi->sendDocument($chatId, $imgPathTgs . '.gif');
 
                 } else {
                     $imgPathWebp = $fileName . '.webp';
