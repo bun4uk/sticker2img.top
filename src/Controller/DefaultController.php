@@ -66,7 +66,7 @@ class DefaultController extends AbstractController
         $update = json_decode($request->getContent());
 
         if (!property_exists($update, 'message')) {
-            $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
+//            $telegramApi->sendMessage(7699150, "```{$request->getContent()}```");
             die;
         }
 
