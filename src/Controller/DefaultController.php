@@ -32,17 +32,15 @@ class DefaultController extends AbstractController
 {
 
     private const ALIK_URLS = [
-//        'https://aliexpress.com/item/1005003097311074.html',
-//        'https://aliexpress.com/item/1005002311819055.html',
-//        'https://aliexpress.com/item/4001233562539.html',
-//        'https://aliexpress.com/item/1005001860045253.html',
-//        'https://aliexpress.com/item/1005003079796619.html',
-//        'https://aliexpress.com/item/1005002347257522.html',
-//        'https://aliexpress.com/item/32958933105.html',
-//        'https://aliexpress.com/item/1005003104363545.html',
-//        'https://aliexpress.com/item/1005003104363545.html',
-        'https://alitems.com/g/l088bndmdr171e502ece16525dc3e8/?i=3',
-        'https://alitems.com/g/v8l11p0ry1171e502ece16525dc3e8/?i=3'
+        'https://aliexpress.com/item/1005003097311074.html',
+        'https://aliexpress.com/item/1005002311819055.html',
+        'https://aliexpress.com/item/4001233562539.html',
+        'https://aliexpress.com/item/1005001860045253.html',
+        'https://aliexpress.com/item/1005003079796619.html',
+        'https://aliexpress.com/item/1005002347257522.html',
+        'https://aliexpress.com/item/32958933105.html',
+        'https://aliexpress.com/item/1005003104363545.html',
+        'https://aliexpress.com/item/1005003104363545.html',
     ];
 
     /**
@@ -117,7 +115,10 @@ class DefaultController extends AbstractController
                 $telegramApi->sendMessage($chatId, '...');
                 $telegramApi->sendMessage(
                     $chatId,
-                    'Hey! While you are waiting. Check out what I found at Aliexpress! ' . PHP_EOL . self::ALIK_URLS[array_rand(self::ALIK_URLS)]
+                    sprintf(
+                        'Hey! While you are waiting. Check out what I found at Aliexpress ' . PHP_EOL . ' https://alitems.com/g/1e8d114494171e502ece16525dc3e8/?ulp=%s!',
+                        urlencode(self::ALIK_URLS[array_rand(self::ALIK_URLS)])
+                    )
                 );
 
                 $file = $telegramApi->getFile($update->message->sticker);
