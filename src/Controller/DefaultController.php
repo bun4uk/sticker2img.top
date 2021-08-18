@@ -30,6 +30,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class DefaultController extends AbstractController
 {
+
+    private const ALIK_URLS = [
+        'https://aliexpress.com/item/1005003097311074.html',
+        'https://aliexpress.com/item/1005002311819055.html',
+        'https://aliexpress.com/item/4001233562539.html',
+        'https://aliexpress.com/item/1005001860045253.html',
+        'https://aliexpress.com/item/1005003079796619.html',
+        'https://aliexpress.com/item/1005002347257522.html',
+        'https://aliexpress.com/item/32958933105.html',
+        'https://aliexpress.com/item/1005003104363545.html',
+        'https://aliexpress.com/item/1005003104363545.html',
+    ];
+
     /**
      * @param Request $request
      * @return Response
@@ -100,6 +113,14 @@ class DefaultController extends AbstractController
             try {
                 $telegramApi->sendMessage($chatId, 'I\'ve got your sticker');
                 $telegramApi->sendMessage($chatId, '...');
+                $telegramApi->sendMessage(
+                    $chatId,
+                    sprintf(
+                        'Hey! While you are waiting. Check out what I found at Aliexpress ' . PHP_EOL . ' https://alitems.com/g/1e8d114494171e502ece16525dc3e8/?ulp=%s!',
+                        urlencode(self::ALIK_URLS[array_rand(self::ALIK_URLS)])
+                    )
+                );
+
                 $file = $telegramApi->getFile($update->message->sticker);
                 $filePath = "https://api.telegram.org/file/bot{$_SERVER['TELEGRAM_API_TOKEN']}/" . $file->file_path;
                 $fileName = __DIR__ . '/../../public/files/img_' . time() . mt_rand();
@@ -133,6 +154,7 @@ class DefaultController extends AbstractController
                         $filePath,
                         $imgPathWebp
                     );
+                    sleep(5);
                     $telegramApi->sendPhoto($chatId, $imgPathWebp);
                     unlink($imgPathWebp);
                 }
