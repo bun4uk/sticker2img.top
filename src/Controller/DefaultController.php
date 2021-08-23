@@ -112,14 +112,18 @@ class DefaultController extends AbstractController
             $entityManager->flush();
             try {
                 $telegramApi->sendMessage($chatId, 'I\'ve got your sticker');
-                $telegramApi->sendMessage($chatId, '...');
-                $telegramApi->sendMessage(
-                    $chatId,
-                    sprintf(
-                        'Hey! While you are waiting. Check out what I found at Aliexpress ' . PHP_EOL . ' https://alitems.com/g/1e8d114494171e502ece16525dc3e8/?ulp=%s!',
-                        urlencode(self::ALIK_URLS[array_rand(self::ALIK_URLS)])
-                    )
-                );
+
+                $telegramApi->query('sendPhoto', [
+                    'caption' => '[Go catch your DISCOUNT up to 90%](https://alitems.com/g/iqoduevfhe171e502ece16525dc3e8)',
+                    'chat_id' => $chatId,
+                    'photo' => 'https://ad.admitad.com/b/iqoduevfhe171e502ece16525dc3e8',
+                    'parse_mode' => 'Markdown'
+                ]);
+                $telegramApi->query('sendChatAction', [
+                    'chat_id' => $chatId,
+                    'action' => 'upload_photo'
+                ]);
+
 
                 $file = $telegramApi->getFile($update->message->sticker);
                 $filePath = "https://api.telegram.org/file/bot{$_SERVER['TELEGRAM_API_TOKEN']}/" . $file->file_path;
