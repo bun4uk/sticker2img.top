@@ -46,7 +46,7 @@ class TelegramBot
      * @return mixed|JsonResponse
      * @throws GuzzleException
      */
-    protected function query(string $method, array $params = [])
+    public function query(string $method, array $params = [])
     {
         try {
             $url = self::TELEGRAM_API_URL . $this->token . '/' . $method;
